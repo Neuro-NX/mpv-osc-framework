@@ -14,7 +14,7 @@ I will build from this, to create an OSC tailored for Windows 10/11. To create a
 
 :warning: Any and all code published will be 'proof of concept' and NOT meant to be used yet.
 
-### Proposals
+## Proposals
 
 **Multi-Platform Support**
 <br>
