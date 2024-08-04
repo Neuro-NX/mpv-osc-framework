@@ -393,10 +393,10 @@ ne.responder['mouse_leave'] = function(self)
 ne = newElement('slider')
 ne.barHeight = 0
 ne.barRadius = 0
-ne.nobRadius = 0
+ne.knobRadius = 0
 ne.geo.gap = 0
 ne.geo.bar = {x1 = 0, y1 = 0, x2 = 0, y2 = 0, r = 0} -- relative pos
-ne.geo.nob = {x = 0, y = 0, r = 0}  -- will be flushed by setParam
+ne.geo.knob = {x = 0, y = 0, r = 0}  -- will be flushed by setParam
 ne.value = 0        -- 0~100
 ne.xMin = 0
 ne.xMax = 0         -- min/max x pos
@@ -417,14 +417,14 @@ ne.getValueAt = function(self, pos)
     end
 ne.setParam = function(self)
         local x1, y1, x2, y2 = getBoxPos(self.geo)
-        local bar, nob = self.geo.bar, self.geo.nob
+        local bar, knob = self.geo.bar, self.geo.knob
         self.hitBox = {x1 = x1, y1 = y1, x2 = x2, y2 = y2}
         
         self.geo.x = x1
         self.geo.y = y1
         self.geo.an = 7       -- help drawing
         
-        local gap = math.max(self.barRadius, self.nobRadius)
+        local gap = math.max(self.barRadius, self.knobRadius)
         self.xMin = x1 + gap
         self.xMax = x2 - gap
         self.xLength = self.xMax - self.xMin
@@ -436,9 +436,9 @@ ne.setParam = function(self)
         bar.x2 = bar.x1 + self.xValue + 2*bar.r
         bar.y2 = bar.y1 + self.barHeight
         
-        nob.x = gap + self.xValue
-        nob.y = self.geo.h / 2
-        nob.r = self.nobRadius
+        knob.x = gap + self.xValue
+        knob.y = self.geo.h / 2
+        knob.r = self.knobRadius
         
         self.geo.gap = gap
     end
@@ -449,16 +449,16 @@ ne.init = function(self)
         self:render()
     end
 ne.render = function(self)
-        local bar, nob = self.geo.bar, self.geo.nob
+        local bar, knob = self.geo.bar, self.geo.knob
         bar.x2 = bar.x1 + self.xValue + 2*self.barRadius
-        nob.x = self.geo.gap + self.xValue
+        knob.x = self.geo.gap + self.xValue
         local ass = assdraw.ass_new()
         ass:new_event()
         ass:draw_start()
         -- bar
         assDrawRectCW(ass, bar.x1, bar.y1, bar.x2, bar.y2, bar.r)
-        -- nob
-        assDrawCirCW(ass, nob.x, nob.y, nob.r)
+        -- knob
+        assDrawCirCW(ass, knob.x, knob.y, knob.r)
         -- markers
         for i, v in ipairs(self.markers) do
             local x = v/100 * self.xLength + self.geo.gap
