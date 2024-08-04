@@ -6,44 +6,44 @@ changelog:
 
 ver 1.5
 
-	[change] improve compatability with --osd-back-color settings
+    [change] improve compatability with --osd-back-color settings
 
 ver 1.4
-	
-	[change] the global var 'elements' is local now
-	[change] element['default'] now have ''default'' style params
-	[change] setAlpha, setStyle for element['default'] is optimized to use the ''default'' style params if not provided by user. This may change the behavior of previous scripts which have used undefined styles.
+    
+    [change] the global var 'elements' is local now
+    [change] element['default'] now have ''default'' style params
+    [change] setAlpha, setStyle for element['default'] is optimized to use the ''default'' style params if not provided by user. This may change the behavior of previous scripts which have used undefined styles.
 
 ver 1.3
 
-	[change] change behavior of active area actions
+    [change] change behavior of active area actions
 
 ver 1.2
 
-	[change] some tweaks on event handle methods
+    [change] some tweaks on event handle methods
 
 ver 1.1
 
-	[change] mouse leaving active areas will produce a 'mouse_leave' event
+    [change] mouse leaving active areas will produce a 'mouse_leave' event
 
 ver 1.0
 
-	[change] change fixedSize to fixedHeight
-	[fix] a bug fix in mouseMove()
-	[change] some minor tweak in the framework
+    [change] change fixedSize to fixedHeight
+    [fix] a bug fix in mouseMove()
+    [change] some minor tweak in the framework
 
 ver 0.6
 
-	[add] realize the init function for element 'default'
-	[add] add a seperate setAlpha function to set alpha codes, yet setStyle function set alpha codes as well
-	[change] element.pack now has 4 elements, [2] = alpha codes, [4] = render codes
-	[change] renderLayout function use setAlpha to mix global transparency
-	[change] optimize setPos() and setStyle()
-	[fix] bugfix for expansions and main
+    [add] realize the init function for element 'default'
+    [add] add a seperate setAlpha function to set alpha codes, yet setStyle function set alpha codes as well
+    [change] element.pack now has 4 elements, [2] = alpha codes, [4] = render codes
+    [change] renderLayout function use setAlpha to mix global transparency
+    [change] optimize setPos() and setStyle()
+    [fix] bugfix for expansions and main
 
 ver 0.5
 
-	first release
+    first release
 
 ## Introduction
 
@@ -59,10 +59,10 @@ To try it, you need to make a new folder like "\~\~/mpv/scripts/demo", and downl
 
 The oscf is coded in [lua](http://www.lua.org/) language, which is natively supported by mpv. The [manual](https://mpv.io/manual/master/#script-location) has told everything about the scripting work, so I just suggest a simple method:
 
-	1. Make a new folder in "~~/mpv/scripts/", such as "~~/mpv/scripts/demo/".
-	2. Copy oscf.lua to "demo".
-	3. Make a new file "main.lua" in "demo".
-	4. Use "require 'oscf'" in main.lua to import oscf. 
+    1. Make a new folder in "~~/mpv/scripts/", such as "~~/mpv/scripts/demo/".
+    2. Copy oscf.lua to "demo".
+    3. Make a new file "main.lua" in "demo".
+    4. Use "require 'oscf'" in main.lua to import oscf. 
 
 Now when mpv starts, it loads demo/main.lua automatically, and oscf starts as well.
 
@@ -117,21 +117,21 @@ Here are details:
 
 **style** is the style params to render the element. They are all ASS styled params. 
 
-	*color* - primary, secondary, outline and background color in **BGR** order. currently, background color only works when --osd-back-color is set in mpv
+    *color* - primary, secondary, outline and background color in **BGR** order. currently, background color only works when --osd-back-color is set in mpv
 
-	*alpha* - primary, secondary, outline and background transparency, 0~255, 255 is invisible.
+    *alpha* - primary, secondary, outline and background transparency, 0~255, 255 is invisible.
 
-	*border* - border size, decimal numbers.
+    *border* - border size, decimal numbers.
 
-	*blur* - blur size, decimal numbers.
+    *blur* - blur size, decimal numbers.
 
-	*shadow* - shadow size, decimal numbers.
+    *shadow* - shadow size, decimal numbers.
 
-	*font* - fontname, string.
+    *font* - fontname, string.
 
-	*fontsize* - font size, decimal numbers.
+    *fontsize* - font size, decimal numbers.
 
-	*wrap* - wrap style, 0 - auto wrap, 1- end wrap, 2 - no wrap, 3 - another auto wrap.
+    *wrap* - wrap style, 0 - auto wrap, 1- end wrap, 2 - no wrap, 3 - another auto wrap.
 
 **visible** is true when the element is visible. 
 
@@ -139,9 +139,9 @@ Here are details:
 
 **init(self)** is the initialize method, which is realized to do the following work:
 
-	setPos()
-	setStyle()
-	render()
+    setPos()
+    setStyle()
+    render()
 
 users can overwrite a new init if needed.
 
@@ -159,13 +159,13 @@ users can overwrite a new init if needed.
 
 ```
 el.responder['event_name'] = function(self, arg)
-		-- this is a universal method that works with any 'event_name'
-		return true/false
-	end
+        -- this is a universal method that works with any 'event_name'
+        return true/false
+    end
 el.responder.event_name = function(self, arg)
-		-- this is a more convenient method, yet not all the 'event_name' works with lua syntax
-		return true/false
-	end
+        -- this is a more convenient method, yet not all the 'event_name' works with lua syntax
+        return true/false
+    end
 ```
 
 A responder returning **true** will terminate this event for other elements. This may be useful in mouse action events when multiple elements are overlapped and only the top one is allowed to responde.
@@ -194,11 +194,11 @@ In this tool, events are identified by name, which is a string, such as 'get_rea
 
 There are 3 events built in to support this framework: 'resize', 'idle', and 'mouse_leave'. 
 
-	'resize' happens when the osc dimesions are changed, which is very useful to reset the geometry of an element.
-	
-	'idle' happens when mpv goes into/out of idle status.
-	
-	'mouse_leave' happens when the mouse pointer moves out of an active area.
+    'resize' happens when the osc dimesions are changed, which is very useful to reset the geometry of an element.
+    
+    'idle' happens when mpv goes into/out of idle status.
+    
+    'mouse_leave' happens when the mouse pointer moves out of an active area.
 
 Users can generate and dispatch other events using
 
@@ -212,21 +212,21 @@ This function dispatch events for all layouts. Then the function in **element.re
 
 This tool provides basic mouse action support, they are:
 
-	mouse_move/ mouse_leave
-	mbtn_left_down/ mbtn_left_up
-	mbtn_mid_down/ mbtn_mid_up
-	mbtn_right_down/ mbnt_right_up
-	mbtn_left_dbl/ mbtn_right_dbl
-	wheel_up/ wheel_down
+    mouse_move/ mouse_leave
+    mbtn_left_down/ mbtn_left_up
+    mbtn_mid_down/ mbtn_mid_up
+    mbtn_right_down/ mbnt_right_up
+    mbtn_left_dbl/ mbtn_right_dbl
+    wheel_up/ wheel_down
 
 All mouse actions are treated as events. Normally the responder should be like:
 
 ```
 element.responder['mouse_move'] = function(self, pos)
-		local x, y = pos[1], pos[2]
-		....
-		return true
-	end
+        local x, y = pos[1], pos[2]
+        ....
+        return true
+    end
 ```
 
 It should be noticed that except for 'mouse_move' and 'mouse_leave', other mouse button events are generated only when the mouse pointer is inside of an 'active area'.
@@ -247,7 +247,7 @@ Here 'name' is the name string of an area, and x1, y1, x2, y2 are left, top righ
 
 'prop' is the property of the area. It is optional, and only supported property other than nil by now is 
 
-	show_hide - mouse moves in this area whill show osc once, but won't generate mouse events, nor enabling mouse keybindings.
+    show_hide - mouse moves in this area whill show osc once, but won't generate mouse events, nor enabling mouse keybindings.
 
 ## Timer
 

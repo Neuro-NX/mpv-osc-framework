@@ -2,11 +2,11 @@
 -- by maoiscat
 -- github.com/maoiscat/
 
-local assdraw = require 'mp.assdraw'
 require 'oscf'
+local assdraw = require 'mp.assdraw'
 
 -- # some useful functions
--- print table, for debug
+-- print table, for debugging
 function ptb(tab, prefix)
     local fmt, str
     if prefix == nil then prefix = tostring(tab) end
@@ -118,9 +118,9 @@ function cycleTrack(name, direction)
     mp.commandv('set', name, newTrack)
 end
 
--- build ass fomrat style code, almost a copy from oscf.lua
--- trans is a global tansparency modifier
--- return foramted style text
+-- build ASS formatted code for styles, almost a copy from oscf.lua
+-- trans is a global transparency modifier
+-- return formatted style text
 function buildStyle(style, trans)
     if not style then return '' end
     if not trans then trans = 0 end
@@ -169,8 +169,7 @@ function isInside(obj, pos)
     end
 end
 
-
--- ass draw alias
+-- ASSDraw alias
 -- draw a circle in clockwise direction
 function assDrawCirCW(ass, x, y, r)
     ass:round_rect_cw(x-r, y-r, x+r, y+r, r)
@@ -207,10 +206,9 @@ function assDrawLineTo(ass, x, y)
     ass:line_to(x, y)
 end
 
-
 -- # element templates
 -- logo
--- shows a logo in the center
+-- display a logo in the center
 local ne = newElement('logo')
 ne.init = function(self)
         self.geo.x = player.geo.width / 2
@@ -249,7 +247,7 @@ ne.init = function(self)
         ass:new_event()
         ass:pos(self.geo.x, player.geo.height - 20)
         ass:an(2)
-        ass:append('{\\fs30\\1c&H0&\\3c&HFFFFFF&\\q2\\4a&HFF&}DROP FILES HERE TO PLAY')
+        ass:append('{\\fs30\\1c&H0&\\3c&HFFFFFF&\\q2\\4a&HFF&}No media. Drop file onto window.')
         
         self.pack[4] = ass.text
     end
@@ -258,7 +256,7 @@ ne.responder['resize'] = function(self)
     end
 
 -- msg
--- display a message in the screen
+-- display a message on the screen
 ne = newElement('message')
 ne.geo.x = 40
 ne.geo.y = 20
@@ -268,7 +266,7 @@ ne.visible = false
 ne.text = ''
 ne.startTime = 0
 ne.duration = 0
-ne.style.color = {'ffffff', '0', '0', '333333'}
+ne.style.color = {'FFFFFF', '0', '0', '333333'}
 ne.style.border = 1
 ne.style.shadow = 1
 ne.render = function(self)    
@@ -294,7 +292,7 @@ ne.display = function(self, text, duration)
     end
 
 -- box
--- draw a simple box, usually used as backgrounds
+-- draw a simple box, commonly used for creating a background
 ne = newElement('box')
 ne.geo.r = 0    -- corner radius
 ne.init = function(self)
@@ -317,7 +315,7 @@ ne = newElement('button')
 ne.enabled = true
 ne.text = ''
 ne.style.color1 = {'0', '0', '0', '0'}
-ne.style.color2 = {'ffffff', 'ffffff', 'ffffff', 'ffffff'}
+ne.style.color2 = {'FFFFFF', 'FFFFFF', 'FFFFFF', 'FFFFFF'}
 -- responder active area, left top right bottom
 ne.hitBox = {x1 = 0, y1 = 0, x2 = 0, y2 = 0}
 ne.init = function(self)
@@ -397,13 +395,13 @@ ne.knobRadius = 0
 ne.geo.gap = 0
 ne.geo.bar = {x1 = 0, y1 = 0, x2 = 0, y2 = 0, r = 0} -- relative pos
 ne.geo.knob = {x = 0, y = 0, r = 0}  -- will be flushed by setParam
-ne.value = 0        -- 0~100
+ne.value = 0            -- 0~100
 ne.xMin = 0
-ne.xMax = 0         -- min/max x pos
-ne.xLength = 0      -- xMax - xMin
-ne.xValue = 0       -- value/100 * xLength
-ne.style.color1 = {}   -- color1 for enabled
-ne.style.color2 = {}   -- color2 for disabled
+ne.xMax = 0             -- min/max x pos
+ne.xLength = 0          -- xMax - xMin
+ne.xValue = 0           -- value/100 * xLength
+ne.style.color1 = {}    -- color1 for enabled
+ne.style.color2 = {}    -- color2 for disabled
 ne.enabled = true
 ne.hitBox = {}
 ne.markers = {}
@@ -422,7 +420,7 @@ ne.setParam = function(self)
         
         self.geo.x = x1
         self.geo.y = y1
-        self.geo.an = 7       -- help drawing
+        self.geo.an = 7 -- help drawing
         
         local gap = math.max(self.barRadius, self.knobRadius)
         self.xMin = x1 + gap
