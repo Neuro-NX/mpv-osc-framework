@@ -7,33 +7,33 @@
 player = {
     now = 0,        -- a copy of local now for public access
     geo = {width = 0, height = 0, aspect = 0},
-    idle = true,	-- idle status
+    idle = true,    -- idle status
     }
 -- user options, altering them may change osc behavior
 opts = {
     scale = 1,              -- osc render scale
-    fixedHeight = false,	-- set true for fixed osc y resolution to 480, all items scale with window height
-    hideTimeout = 1,		-- time in seconds for osc to hide, negative means never
-    fadeDuration = 0.5,	    -- time in seconds for osc to fade out, negative means never
+    fixedHeight = false,    -- set true for fixed osc y resolution to 480, all items scale with window height
+    hideTimeout = 1,        -- time in seconds for osc to hide, negative means never
+    fadeDuration = 0.5,     -- time in seconds for osc to fade out, negative means never
     }
 
 -- local variables, users do not touch them
-local elements = {}			-- all available elements
-local elementsInUse = {}	-- an element added to a layout will be marked here
+local elements = {}         -- all available elements
+local elementsInUse = {}    -- an element added to a layout will be marked here
 local layouts = {idle = {}, play = {}}  -- layouts: idle, play
-local oscLayout = 'idle'	-- selected layout will be rendered
-local activeAreas = {	    -- mouse in these rectangle areas activate osc and key bindings
+local oscLayout = 'idle'    -- selected layout will be rendered
+local activeAreas = {       -- mouse in these rectangle areas activate osc and key bindings
     idle = {}, play = {}}   -- example: idle['name'] = {x1=n1, y1=n2, x2=n3, y2=n4, prop=''}
-local active = false		-- true if mouse is in activeArea
+local active = false        -- true if mouse is in activeArea
 local osd = mp.create_osd_overlay('ass-events')
-local tickTimer = nil	    -- osc timer objects
-local tickDelay = 0.03	    -- 33 fps limit
-local now = 0			    -- now time, updated by tick()
-local mouseScale = 1		-- mouse positon scale
-local visible = false	    -- osc visiblility
-local visualMode = 'out'	-- visual mode: in, out, always, hide 
-local fadeLastTime = 0	    -- fade effect time base
-local fadeFactor = 0		-- fade factor as transparency modifier
+local tickTimer = nil       -- osc timer objects
+local tickDelay = 0.03      -- 33 fps limit
+local now = 0               -- now time, updated by tick()
+local mouseScale = 1        -- mouse positon scale
+local visible = false       -- osc visiblility
+local visualMode = 'out'    -- visual mode: in, out, always, hide 
+local fadeLastTime = 0      -- fade effect time base
+local fadeFactor = 0        -- fade factor as transparency modifier
 
 -- # basic osc functions
 -- set osd display
@@ -136,7 +136,7 @@ local function oscResize()
     if dispAspect > 0 then -- in some cases osd size could be zero, need to check
         if opts.fixedHeight then -- if true, baseWidth is calculated according to baseHeight
             baseWidth = baseHeight * dispAspect
-        else					 -- or else, use real window size
+        else                     -- or else, use real window size
             baseWidth, baseHeight = dispWidth, dispHeight 
         end
     end
