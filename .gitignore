@@ -1,0 +1,5 @@
+# Windows fonts not licensed by Microsoft for distribution
+# uses global pattern to catch all case variants
+[Ss]egoe*
+[Ss]eg*[UIui]*
+[Ss]eg*[MDmd]*
