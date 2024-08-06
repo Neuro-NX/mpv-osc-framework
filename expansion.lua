@@ -243,12 +243,12 @@ ne.init = function(self)
         ass:line_to(23.3, 5)
         ass:line_to(-20, 35)
         ass:draw_stop()
-        
+
         ass:new_event()
         ass:pos(self.geo.x, player.geo.height - 20)
         ass:an(2)
         ass:append('{\\fs30\\1c&H0&\\3c&HFFFFFF&\\q2\\4a&HFF&}No media. Drop file onto window.')
-        
+
         self.pack[4] = ass.text
     end
 ne.responder['resize'] = function(self)
@@ -386,7 +386,7 @@ ne.hide = function(self, key)
 ne.responder['mouse_leave'] = function(self)
         self.visible = false
     end
-    
+
 -- slider
 ne = newElement('slider')
 ne.barHeight = 0
@@ -417,27 +417,27 @@ ne.setParam = function(self)
         local x1, y1, x2, y2 = getBoxPos(self.geo)
         local bar, knob = self.geo.bar, self.geo.knob
         self.hitBox = {x1 = x1, y1 = y1, x2 = x2, y2 = y2}
-        
+
         self.geo.x = x1
         self.geo.y = y1
         self.geo.an = 7 -- help drawing
-        
+
         local gap = math.max(self.barRadius, self.knobRadius)
         self.xMin = x1 + gap
         self.xMax = x2 - gap
         self.xLength = self.xMax - self.xMin
         self.xValue = self.value/100 * self.xLength
-        
+
         bar.r = self.barRadius
         bar.x1 = gap - bar.r
         bar.y1 = (self.geo.h - self.barHeight) / 2
         bar.x2 = bar.x1 + self.xValue + 2*bar.r
         bar.y2 = bar.y1 + self.barHeight
-        
+
         knob.x = gap + self.xValue
         knob.y = self.geo.h / 2
         knob.r = self.knobRadius
-        
+
         self.geo.gap = gap
     end
 ne.init = function(self)
